@@ -1,3 +1,0 @@
-This will import code from ClearCase UCM based on baselines and rsync.  It is written in ksh and perl.
-
-The author of this is Venkat Palli.  
