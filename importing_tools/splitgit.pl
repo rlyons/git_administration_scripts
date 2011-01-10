@@ -34,7 +34,34 @@ foreach my $line (<CONFIGFILE>) {
 			$rc     = $?;
 			chdir "$newreponame";
 
+			my $reftmp='git branch -r';
+			open REFLIST, "$reftmp |";
+			foreach my $ref (<REFLIST>) {
+				chomp($ref);
+				#my $cmd = "git branch --track $ref";
+				#@stdout = qx [$cmd];
+				#$rc     = $?;
+				
+				my $rtmp;
+				if(/origin\/(.+$)/) {
+					$rtmp=$1;
+				}
+				my $cmd = "git checkout $rtmp";
+				@stdout = qx [$cmd];
+				$rc     = $?;
 
+
+				my $cmd = "git pull --all";
+				@stdout = qx [$cmd];
+				$rc     = $?;
+
+			}
+			close REFLIST;
+
+
+
+##for remote in `git branch -r `; do git branch --track $remote; done
+##for remote in `git branch -r `; do git checkout $remote ; git pull; done
 			my $cmd = "git filter-branch --prune-empty --subdirectory-filter $splitpattern -- --all";
 			@stdout = qx [$cmd];
 			$rc     = $?;
