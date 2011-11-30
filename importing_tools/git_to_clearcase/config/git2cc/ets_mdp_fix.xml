@@ -1,0 +1,22 @@
+<config>
+	<!-- These values can be defined using environment variables or locally defined variables in this file -->
+	<property name="basedir" value="/home/_svcmaven-dev/gitimports/git2cc/projects/gitrepos" />
+	<property name="repodir" value="${basedir}" />
+	<property name="view_host" value="apstrd04801q" />
+	<property name="view_stgloc" value="/cme/vws" />
+	<property name="view_prefix" value="cmgit2ccmdpfix" />
+	<property name="max_processes" value="4" />
+
+	<!-- PVOB context for components and streams -->
+	<pvob name="/cc/ETS_CCM_PROJECT">
+		<!-- Generic Mapping for branches. Can be overridden at the next lower level -->
+
+		<!-- GIT REPO and the associated component -->
+		<gitrepo name="ets_mdp_fix" url="ssh://git@cmegit/fest/ets_mdp_fix.git" component="ETS_MDP_FIX_PUMA_SOURCE">
+		<branch name="release" stream="ETS_MDP_FIX1.0_git_integration" activity=""/>
+		<!--<branch name="maintenance_ETS_MDP_FIXFAST2.2" stream="maintenance_ETS_MDP_FIX1.0_git" activity=""/> -->
+		<branch name="maintenance_hotfix_puma1.0_rel" stream="maint1_ETS_MDP_FIX1.0_git" activity=""/> 
+		<!--	<branch name="maintenance_puma1.0_rel" stream="maintenance_ETS_MDP_FIX_ADAPTER" activity="mdp_fix_adapter_sync_maint"/> -->
+		</gitrepo>
+	</pvob>
+</config>

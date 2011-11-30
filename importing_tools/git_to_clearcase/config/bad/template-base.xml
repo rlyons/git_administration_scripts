@@ -1,0 +1,78 @@
+<config>
+	<!-- These values can be defined using environment variables or locally 
+		defined variables in this file -->
+	<property name="basedir" value="/var/tmp/spalli/repos" />
+	<property name="repodir" value="${basedir}" />
+	<property name="view_host" value="ccview1" />
+	<property name="view_stgloc" value="/net/ccview1/viewstg1" />
+	<property name="view_prefix" value="cmgit" />
+	<property name="max_processes" value="4" />
+
+	<vob name="/cc/EMA">
+		<gitrepo name="CPC">
+			<!-- directories to import --> 
+			<include name="/cc/EMA/cpc" />
+			<include name="/cc/EMA/cpc2" />
+			<include name="/cc/EMA/common" />
+			<include name="/cc/EMA/jms/dist" />
+			<include name="/cc/SCM_SCRIPTS/build" />
+			<!-- branches to import -->
+			<branch name="main" start_from="">
+				<!-- label patterns to import -->
+				<labelpattern name="CPC_R" />
+			</branch>
+			<branch name="cpc_0811" start_from="CPC_R9831_V5_0_7_20100813_1042">
+				<labelpattern name="CPC_BRANCH_R9900_" />
+			</branch>
+			<branch name="cpc_20101018" start_from="CPC_R9920_V5_1_0_20100923_1410">
+				<labelpattern name="CPC_BRANCH_R10033_" />
+			</branch>
+			<branch name="cpc2_hotfix_0715" start_from="CPC_R9831_V5_0_7_20100709_1507">
+				<labelpattern name="CPC_BRANCH_R9867_V5_0_6_1_" />
+			</branch>
+			<branch name="cpc2_v5_branch" start_from="CPC_R9562_V5_0_4_20100512_0715">
+				<label name="CPC_BRANCH_R9734_V5_0_3_1_20100512_1154" />
+				<label name="CPC_BRANCH_R9746_V5_0_3_2_20100519_1341" />
+				<label name="CPC_BRANCH_R9756_V5_0_3_3_20100521_1636" />
+			</branch>
+			<branch name="cpc_cme_exch" start_from="CPC_R9432_V4_0_3_20100125_1707">
+				<labelpattern name="CPC_BRANCH_R9525_V4_0_2_" />
+			</branch>
+			<branch name="cpc_natgas" start_from="CPC_RFB10067_20101123_0939">
+				<label name="CPC_RFB10067_20101123_1306" />
+				<label name="CPC_RFB10067_20101123_1613" />
+				<label name="CPC_RFB10110_20101123_1643" />
+				<label name="CPC_5.2.1_RFB10110_20101202_1801" />
+				<label name="CPC_5.2.1_RFB10110_20101203_0825" />
+				<label name="CPC_5.2.3_RFB10133_20101214_1501" />
+				<label name="CPC_5.2.0_RFB10067_20101223_1522" />
+			</branch>
+			<branch name="cpc_v4.0.3_branch" start_from="CPC_R9432_V4_0_3_20100203_1634">
+				<label name="CPC_BRANCH_R9550_V4_0_4_20100208_1633" />
+				<label name="CPC_BRANCH_R9550_V4_0_4_20100208_1703" />
+				<label name="CPC_BRANCH_R9550_V4_0_4_20100208_1703_QI09LINUX" />
+				<label name="CPC_BRANCH_R9551_V4_0_4_20100211_0943" />
+				<label name="CPC_BRANCH_R9570_V4_0_4_1_20100222_1153" />
+				<label name="CPC_BRANCH_R9551_V4_0_5_20100223_1657" />
+				<label name="CPC_BRANCH_R9571_V4_0_5_20100223_1726" />
+				<label name="CPC_BRANCH_R9551_V4_0_5_20100223_1657_QI09LINUX" />
+				<label name="CPC_BRANCH_R9551_V4_0_5_20100223_1657_RDCLINUX" />
+				<label name="CPC_BRANCH_R9551_V4_0_5_20100224_1044" />
+				<label name="CPC_BRANCH_R9551_V4_0_5_20100224_1054" />
+				<label name="CPC_BRANCH_R9551_V4_0_5_20100224_1326" />
+				<label name="CPC_BRANCH_R9551_V4_0_5_20100225_1437" />
+				<label name="CPC_BRANCH_R9551_V4_0_5_20100226_0716" />
+				<label name="CPC_BRANCH_R9551_V4_0_5_20100226_0716_DRLINUX" />
+				<label name="CPC_BRANCH_R9551_V4_0_5_20100226_0716_QI09LINUX" />
+				<label name="CPC_BRANCH_R9571_V4_0_5_20100226_0930" />
+				<label name="CPC_BRANCH_R9585_V4_0_6_20100308_1653" />
+				<label name="CPC_BRANCH_R9585_V4_0_6_20100308_1742" />
+				<label name="CPC_BRANCH_R9585_V4_0_6_20100315_1005" />
+			</branch>
+		</gitrepo>
+	</vob>
+
+	<!-- <pvob name="/cc/ETS_CCM_PROJECT"> <stream name="ETS_FEST_COMMONS_integration"/> 
+		</pvob> <pvob name="/cc/ISG_CCM_PROJECT"> <stream name="EDT_EOS_TRADER5.1_integration"/> 
+		<stream name="EDT_EOS_TRADER6.1_integration"/> </pvob> -->
+</config>

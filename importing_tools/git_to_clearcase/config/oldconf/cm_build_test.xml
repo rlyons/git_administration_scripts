@@ -1,0 +1,18 @@
+<config>
+	<!-- These values can be defined using environment variables or locally defined variables in this file -->
+	<property name="basedir" value="/home/ccase/e13139/git_ws/projects/gitrepos" />
+	<property name="repodir" value="${basedir}" />
+	<property name="view_host" value="ccview1" />
+	<property name="view_stgloc" value="/net/ccview1/viewstg1" />
+	<property name="view_prefix" value="cmgit2cctest" />
+	<property name="max_processes" value="4" />
+
+	<!-- PVOB context for components and streams -->
+	<pvob name="/cc/CME_CM_TEST">
+		<!-- Generic Mapping for branches. Can be overridden at the next lower level -->
+		<branch name="release" stream="TEST_GIT_IMPORT_integration" activity="gitimport" />
+
+		<!-- GIT REPO and the associated component -->
+		<gitrepo name="cm_build_test" url="ssh://git@cmegit/cm_build_test.git" component="comp_gv" />
+	</pvob>
+</config>

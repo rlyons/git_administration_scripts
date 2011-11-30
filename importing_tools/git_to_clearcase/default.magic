@@ -1,0 +1,587 @@
+#
+# Licensed Materials - Property of IBM
+# Rational ClearCase
+# (C) Copyright IBM Corp. 1991, 2008.  All Rights Reserved
+# US Government Users Restricted Rights 
+# Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp
+#
+# This is the default 'magic' file for file typing.
+#
+# Magic files are found by first looking in your HOME directory, (as
+# defined by the environment variable "HOME") for a ".magic" file.
+# Next the ClearCase install directory (often defined by the environment
+# variable "CLEARCASEHOME", in the "config" directory has a "magic" directory
+# in it.  This file, "default.magic" is located there, but any other file
+# ending in .magic will be examined if it's there as well.
+#
+# You can also set the environment variable "MAGIC_PATH" which overrides
+# the search path described above.
+# 
+# Within a given directory, all files with a '.magic' suffix are read
+# in ASCII-alphabetical-order (i.e. 'Z' comes after 'W' but before 'a').
+#
+
+# Check stat type
+directory : -stat d ;
+block_device : -stat b ;
+char_device : -stat c ;
+socket : -stat s ;
+fifo : -stat f ;
+
+# Match by name without examining data
+core file : -name "core" ;
+# (seems printable, but has binary at the end of it)
+json_file binary_delta_file : -name "*.json" ;
+js_file binary_delta_file : -name "*.js" ;
+lisp_object object_module file : -name "*.lbin" ;
+program compressed_file : -name "*.[eE][xX][eE]" | -name "*.bin" ;
+object_module compressed_file : -name "*.[oO][bB][jJ]" ;
+shlib library compressed_file : -name "*.[dD][lL][lL]" ;
+zip_archive archive file : -name "*.[zZ][iI][pP]" ;
+gtar_archive archive file : -name "*.gtar" ;
+tar_archive archive compressed_file : -name "*.tar" ;
+audio compressed_file : -name "*.au" | -name "*.aif" | -name "*.aiff" ;
+audio file : -name "*.aifc" ;
+audio compressed_file : -name "*.[wW][aA][vV]" ;
+gif_image image file : -name "*.[gG][iI][fF]" ;
+ief_image image compressed_file : -name "*.ief" ;
+jpeg_image image file : -name "*.[jJ][pP][eE][gG]" | -name "*.[jJ][pP][gG]" | -name "*.[Jj][pP][eE]" ;
+tiff_image image compressed_file : -name "*.tiff" | -name "*.[tT][iI][fF]" ;
+mpeg_video video file : -name "*.mpeg" | -name "*.mpg" | -name "*.mpe" ;
+quicktime_video video file : -name "*.qt" | -name "*.mov" ;
+ms_video video file : -name "*.[aA][vV][iI]" ;
+sgi_video video file : -name "*.movie" ;
+cmu_raster compressed_file : -name "*.ras" ;
+portable_anymap compressed_file : -name "*.pnm" ;
+portable_bitmap compressed_file : -name "*.pbm" ;
+portable_graymap compressed_file : -name "*.pgm" ;
+portable_pixmap compressed_file : -name "*.ppm" ;
+rgb_image image compressed_file : -name "*.rgb" ;
+x_bitmap compressed_file : -name "*.xbm" ;
+x_pixmap compressed_file : -name "*.xpm" ;
+x_window_dump image compressed_file : -name "*.xwd" ;
+oda compressed_file : -name "*.oda" ;
+pdf compressed_file : -name "*.[pP][dD][fF]" ;
+hdf compressed_file : -name "*.hdf" ;
+netcdf compressed_file : -name "*.nc" | -name "*.[cC][dD][fF]" ;
+process_def source text_file : -name "*.pd" ;
+process_def_object compressed_file : -name "*.pdo" ;
+java_archive compressed_file : -name "*.jar" ;
+html_source html web_file source text_file : -name "*.[hH][tT][mM][lL]" | -name "*.[hH][tT][mM]" ;
+xml binary_delta_file : -name "*.[xX][mM][lL]" | -name "*.[xX][sS][lL]";
+xml binary_delta_file : -name "*.[wW][sS][dD][lL]" | -name "*.[wW][sS][dD][dD]" ;
+postscript document file : -name "*.ai" | -name "*.eps" | -name "*.[pP][sS]" ;
+frame_mif frame_document document compressed_file : -name "*.mif" ;
+troff_source source text_file : -name "*.t" | -name "*.tr" | -name "*.roff" |
+			       -name "*.man" | -name "*.me" | -name "*.ms" ;
+dvi document compressed_file : -name "*.dvi" ;
+latex_source source text_file : -name "*.latex" ;
+tex_source source text_file : -name "*.tex" | -name "*.texinfo" | -name "*.texi" ;
+tcl_source source text_file : -name "*.tcl" ;
+misc_txt text_file : -name "*.rtx" | -name "*.[tT][sS][vV]" | -name "*.[cC][sS][vV]" 
+		| -name "*.etx" | -name "*.[lL][sS][tT]"  ;
+wais_source source text_file : -name "*.src" ;
+mac_binhex40 compressed_file : -name "*.hqx" ;
+powerbuilder_srd compressed_file : -name "*.srd" ;
+powerbuilder_library compressed_file : (-name "*.pb[ldr]" | -name "*.PB[LDR]") ;
+
+# Match printable files by name
+c_source source text_file : -printable & -name "*.c" ;
+c_include include source text_file : -printable & -name "*.h" ;
+cplusplus_source source text_file : -printable &
+                                    (-name "*.cxx" | -name "*.c++" |
+				     -name "*.C" | -name "*.cc" | -name "*.[cC][pP][pP]");
+cplusplus_include include source text_file : -printable &
+                                            (-name "*.[hH][xX][xX]" | -name "*.h++" |
+					     -name "*.H" | -name "*.hh" | -name "*.hpp");
+uil_source source text_file : -printable & -name "*.uil" ;
+csh_script script text_file : -printable &
+                             (-name ".cshrc" | -name ".login" | -name "*.csh");
+sh_script script text_file : -printable & (-name ".profile" | -name "*.sh");
+ksh_script script text_file : -printable &
+			      (-name ".profile" | -name ".login" | -name "*.ksh");
+tcl_source source text_file : -printable & -name "*.tcl" ;
+makefile text_file : -printable &
+                     (-name "Imakefile" | -name "Makefile" | 
+			-name "makefile" | -name "*.[mM][aA][kK]" | -name "*.[mM][kK]") ;
+java_source source text_file : -printable & -name "*.[jJ][aA][vV][aA]" ;
+devstudio_project ds_project source text_file : -printable & -name "*.[dD][sS][pP]" ; 
+devstudio_workspace ds_project source text_file : -printable & -name "*.[dD][sS][wW]" ;
+devstudio_solution_file ds_project source text_file : -printable & -name "*.[sS][lL][nN]" ;
+vid_project ds_project source text_file : -printable & -name "*.[vV][iI][pP]" ;
+v_analyzer_project ds_project source text_file : -printable & -name "*.[vV][aA][pP]" ;
+visual_basic_project ds_project source text_file : -printable & -name "*.[vV][bB][pP]" ;
+visual_basic_workspace ds_project source text_file : -printable & -name "*.[vV][bB][wW]" ;
+resource_file vc_source source text_file : -printable & (-name "*.[rR][cC]" | -name "*.[rR][cC]2") ;
+com_odl_file vc_source source text_file : -printable & -name "*.[oO][dD][lL]" ;
+com_idl_file vc_source source text_file : -printable & -name "*.[iI][dD][lL]" ;
+devstudio_macro vc_source source text_file : -printable & -name "*.[dD][sS][mM]" ;
+registrar_script vc_source source text_file : -printable & -name "*.[rR][gG][sS]" ;
+registry_entries script text_file : -printable & -name "*.[rR][eE][gG]" ;
+module_definition vc_source source text_file : -printable & -name "*.[dD][eE][fF]" ;
+active_server_page web_file source text_file : -printable & -name "*.[aA][sS][pP]" ;
+url web_file source text_file : -printable & -name "*.[uU][rR][lL]" ;
+vbscript web_file script text_file : -printable & -name "*.[vV][bB][sS]" ;
+javascript web_file script text_file : -printable & -name "*.[jJ][sS]" ;
+info script text_file : -printable & -name "*.[iI][nN][fF]" ;
+cascading_style_sheet web_file source text_file : -printable & -name "*.[cC][sS][sS]" ;
+sql_query source text_file : -printable & -name "*.[sS][qQ][lL]" ;
+basic_module vb_source source text_file : -printable & -name "*.[bB][aA][sS]" ;
+vb_form_source vb_source source text_file : -printable & -name "*.[fF][rR][mM]" ;
+vb_class vb_source source text_file : -printable & -name "*.[cC][lL][sS]" ;
+ctl source text_file : -printable & -name "*.[cC][tT][lL]" ;
+property_page vb_source source text_file : -printable & -name "*.[pP][aA][gG]" ;
+user_document vb_source source text_file : -printable & -name "*.[dD][oO][bB]" ;
+active_designer vb_source source text_file : -printable & -name "*.[dD][sS][rR]" ;
+msdos_batch script text_file : -printable & -name "*.[bB][aA][tT]" ;
+rose_model rose rose_unit rational source text_file : -printable & -name "*.mdl" ;
+petal rose rose_unit rational source text_file : -printable & -name "*.ptl" ;
+rose_package rose rose_unit rational source text_file : -printable & -name "*.cat" ;
+rose_component_diagram_package rose rose_unit rational source text_file : -printable & -name "*.sub" ; 
+rose_properties rose rose_unit rational source text_file : -printable & -name "*.pty" ;
+rose_prp_properties rose rose_unit rational source text_file : -printable & -name "*.prp" ; 
+rose_processor_diagram rose rose_unit rational source text_file : -printable & -name "*.prc" ;
+rosert binary_delta_file : -printable & (
+                        -name "*.rtmdl"       | -name "*.rtptl"      |
+                        -name "*.rtlogpkg"    | -name "*.rtclass"    |
+                        -name "*.rtcollab"    | -name "*.rtclassdgm" |
+                        -name "*.rtcmppkg"    | -name "*.rtcmp"      |
+                        -name "*.rtcmpdgm"    | -name "*.rtdeploy"   |
+                        -name "*.rtdeploydgm" | -name "*.rtdev"      |
+                        -name "*.rtprcsr"     | -name "*.rtintractn" );
+perl script text_file : -printable & (-name "*.[pP][lL]" | -name "*.prl" | -name "*.perl" | -name "*.ph");
+log_file document text_file : -printable & -name "*.[lL][oO][gG]" ;
+txt document text_file : -printable & -name "*.[tT][xX][tT]" ;
+initialization_entries ini text_file : -printable & -name "*.[iI][nN][iI]" ;
+perl_library script text_file : -printable & -name "*.pm" ;
+powerbuilder_source source text_file : -printable & 
+	(-name "*.sr[duajmpfsqw]" | -name "*.SR[DUAJMPFSQW]") ;
+oracle_form_text oracle source text_file : -printable &
+	(-name "*.fmt" | -name "*.FMT") ;
+oracle_menu_text oracle source text_file : -printable &
+	(-name "*.mmt" | -name "*.MMT") ;
+oracle_plsql_text oracle source text_file : -printable &
+	(-name "*.pld" | -name "*.PLD") ;
+oracle_object_library_text oracle source text_file : -printable &
+	(-name "*.olt" | -name "*.OLT") ;
+lex source text_file : -printable & -name "*.l" ;
+yacc source text_file : -printable & -name "*.y" ;
+global_server_file web_file source text_file : -printable & -name "*.[aA][sS][aA]" ;
+help_project source text_file : -printable & -name "*.[hH][pP][jJ]" ;
+help_contents source text_file : -printable & -name "*.[cC][nN][tT]" ;
+assembler source text_file : -printable & -name "*.[aA][sS][mM]" ;
+cobol source text_file : -printable & -name "*.[cC][bB][lL]" ;
+fortran source text_file : -printable & (-name "*.[fF]" | -name "*.[fF]90" | -name "*.[fF][oO][rR]") ;
+pascal source text_file : -printable & -name "*.[pP][aA][sS]" ;
+
+# Check Magic Numbers
+postscript document file : -magic 0, "%!" ;
+frame_document document compressed_file : -magic 0, "<MakerFile" ;
+frame_dictionary frame_document document compressed_file : -magic 0, "<MakerDictionar" ;
+frame_font frame_document document compressed_file : -magic 0, "<MakerScreenFon" ;
+frame_mif frame_document document compressed_file : -magic 0, "<MIFFile" ;
+frame_mml frame_document document compressed_file : -magic 0, "<MML" ;
+frame_book frame_document document compressed_file : -magic 0, "<Book" ;
+interleaf_ascii document compressed_file : -magic 0, "<!OPS" ;
+decwrite_document document compressed_file : -magic 25, "DECwrite" ;
+cpio archive compressed_file : -magic 0, l_short, 070707 |
+	           	      -magic 0, b_short, 070707 |
+	          	      -magic 0, "070707" ;
+audio compressed_file : -magic 0, ".snd" ;
+archive library compressed_file : -magic 0, "!<arch>" |
+	              		 -magic 0, b_short, 0177545 |
+	              		 -magic 0, b_long, 0177555 ;
+sparc_program elf_program program compressed_file :  -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 16, l_short, 2 &
+			    -magic 18, l_short, 2 |
+			   -magic 5, byte, 2 & -magic 16, b_short, 2 &
+			    -magic 18, b_short, 2 ) ;
+386_program elf_program program compressed_file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 16, l_short, 2 &
+			    -magic 18, l_short, 3 |
+			   -magic 5, byte, 2 & -magic 16, b_short, 2 &
+			    -magic 18, b_short, 3 ) ;
+68000_program elf_program program compressed_file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 16, l_short, 2 &
+			    -magic 18, l_short, 4 |
+			   -magic 5, byte, 2 & -magic 16, b_short, 2 &
+			    -magic 18, b_short, 4 ) ;
+486_program elf_program program compressed_file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 16, l_short, 2 &
+			    -magic 18, l_short, 6 |
+			   -magic 5, byte, 2 & -magic 16, b_short, 2 &
+			    -magic 18, b_short, 6 ) ;
+mips_program elf_program program compressed_file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 16, l_short, 2 &
+			    -magic 18, l_short, 8 |
+			   -magic 5, byte, 2 & -magic 16, b_short, 2 &
+			    -magic 18, b_short, 8 ) ;
+elf_program program compressed_file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 16, l_short, 2 |
+			   -magic 5, byte, 2 & -magic 16, b_short, 2) ;
+sparc_core elf_core core file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 16, l_short, 4 &
+			    -magic 18, l_short, 2 |
+			   -magic 5, byte, 2 & -magic 16, b_short, 4 &
+			    -magic 18, b_short, 2 ) ;
+386_core elf_core core file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 16, l_short, 4 &
+			    -magic 18, l_short, 3 |
+			   -magic 5, byte, 2 & -magic 16, b_short, 4 &
+			    -magic 18, b_short, 3 ) ;
+68000_core elf_core core file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 16, l_short, 4 &
+			    -magic 18, l_short, 4 |
+			   -magic 5, byte, 2 & -magic 16, b_short, 4 &
+			    -magic 18, b_short, 4 ) ;
+486_core elf_core core file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 16, l_short, 4 &
+			    -magic 18, l_short, 6 |
+			   -magic 5, byte, 2 & -magic 16, b_short, 4 &
+			    -magic 18, b_short, 6 ) ;
+mips_core elf_core core file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 16, l_short, 4 &
+			    -magic 18, l_short, 8 |
+			   -magic 5, byte, 2 & -magic 16, b_short, 4 &
+			    -magic 18, b_short, 8 ) ;
+elf_core core file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+		    (-magic 5, byte, 1 & -magic 16, l_short, 4 |
+		     -magic 5, byte, 2 & -magic 16, b_short, 4) ;
+sparc_object elf_object object_module compressed_file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 18, l_short, 2 |
+			   -magic 5, byte, 2 & -magic 18, b_short, 2 ) ;
+386_object elf_object object_module compressed_file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 18, l_short, 3 |
+			   -magic 5, byte, 2 & -magic 18, b_short, 3 ) ;
+68000_object elf_object object_module compressed_file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 18, l_short, 4 |
+			   -magic 5, byte, 2 & -magic 18, b_short, 4 ) ;
+486_object elf_object object_module compressed_file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 18, l_short, 6 |
+			   -magic 5, byte, 2 & -magic 18, b_short, 6 ) ;
+mips_object elf_object object_module compressed_file : -magic 0, byte, 0x7f & -magic 1, "ELF" &
+			  (-magic 5, byte, 1 & -magic 18, l_short, 8 |
+			   -magic 5, byte, 2 & -magic 18, b_short, 8 ) ;
+elf_object object_module compressed_file : -magic 0, byte, 0x7f & -magic 1, "ELF" ;
+mips_program program compressed_file : -magic 0, b_short, 0x0160 &
+			   -magic 20, b_short, 0413 ;
+mips_object object_module compressed_file : -magic 0, b_short, 0x0160 ;
+sparc_object object_module compressed_file : -magic 0, b_short, 0403 ;
+sparc_program program compressed_file : -magic 0, b_short, 0100403 ;
+parisc_object object_module compressed_file : -magic 0, b_long, 0x02100106 ;
+parisc_program program compressed_file : -magic 0, b_long, 0x02100107 |
+                             -magic 0, b_long, 0x02100108 ;
+alpha_object coff_object object_module compressed_file : -name "*.o" &
+		((-magic 0, l_short, 0603 | -magic 0, l_short, 0617) |
+		(-magic 0, b_short, 0603 | -magic 0, b_short, 0617)) ;
+alpha_program coff_program program compressed_file :
+		-magic 0, l_short, 0603 | -magic 0, l_short, 0617 |
+		-magic 0, b_short, 0603 | -magic 0, b_short, 0617 ;
+rs6000_object coff_object object_module compressed_file : -name "*.o" &
+		(-magic 0, b_short, 0730 |
+		 -magic 0, b_short, 0735 |
+		 -magic 0, b_short, 0737 ) ;
+rs6000_program coff_program program compressed_file :
+		(-magic 0, b_short, 0730 |
+		 -magic 0, b_short, 0735 |
+		 -magic 0, b_short, 0737 ) ;
+mac_binhex40 compressed_file : -printable & -name "*.hqx" ;
+nlm compressed_file : -magic 0, "NetWare Loadable Module" ;
+ncb_idb_pdb_bsc vc_derived compressed_file : -magic 0, "Microsoft" & -token "program database" ;
+bitmap image compressed_file : -magic 0, "BM" ;
+obr compressed_file : -magic 0, "WATCOM" ;
+dlg vc_derived compressed_file : -magic 0, "DLG1" ;
+xde : -magic 0, "<?xml" & -token "rational" & -token "xde" ;
+xtools2 --mkeltype.xtools2.binary_delta_file._xtools2 : -magic 0, "<?xml" & -token "xtools2_universal_type_manager";
+xtools --mkeltype.xtools.binary_delta_file._xtools : -magic 0, "<?xml" & -token "xtools.umlvisualizer";
+xml binary_delta_file : -magic 0, "<?xml";
+
+# Match non-printable files by name
+object_module compressed_file : !-printable & -name "*.o" ;
+uid_object object_module file : !-printable & -name "*.uid" ;
+archive library compressed_file : !-printable & -name "*.a" ;
+shlib library compressed_file : !-printable & (-name "lib*_s" | -name "lib*.so.*" | -name "lib*.so");
+vjava_project ds_project compressed_file : !-printable & -name "*.[vV][jJ][pP]" ;
+workspace_options ds_project compressed_file : !-printable & -name "*.[oO][pP][tT]" ;
+compiled_resource vs_derived compressed_file : !-printable & -name "*.[rR][eE][sS]" ;
+type_library vs_derived compressed_file : !-printable & -name "*.[tT][lL][bB]" ;
+win_library vc_derived library compressed_file : !-printable & -name "*.[lL][iI][bB]" ;
+cursor vs_source resource compressed_file : !-printable & -name "*.[cC][uU][rR]" ;
+icon vs_source resource compressed_file : !-printable & -name "*.[iI][cC][oO]" ;
+resource_template vc_source resource compressed_file : !-printable & -name "*.[rR][cC][tT]" ;
+activex_control vs_derived library compressed_file : !-printable & -name "*.[oO][cC][xX]" ;
+cabinet archive file : !-printable & -name "*.[cC][aA][bB]" ;
+vb_form_compiled vb_derived compressed_file : !-printable & -name "*.[fF][rR][xX]" ;
+vb_user_control_compiled vb_derived compressed_file : !-printable & -name "*.[cC][tT][xX]" ;
+user_document_compiled vb_derived compressed_file : !-printable & -name "*.[dD][oO][xX]" ;
+active_designer_compiled vb_derived compressed_file : !-printable & -name "*.[dD][sS][xX]" ;
+property_page_compiled vb_derived compressed_file : !-printable & -name "*.[pP][gG][xX]" ;
+site_diagram web_file compressed_file : !-printable & -name "*.[wW][dD][mM]" ;
+ms_access_db database compressed_file : !-printable & -name "*.[mM][dD][bB]" ;
+management_saved_console mmc compressed_file : !-printable & -name "*.[mM][sS][cC]" ;
+shortcut compressed_file : !-printable & -name "*.[lL][nN][kK]" ;
+visio_template visio compressed_file : !-printable & -name "*.[vV][sS][tT]" ;
+visio_workspace visio compressed_file : !-printable & -name "*.[vV][sS][wW]" ;
+visio_drawing visio compressed_file : !-printable & -name "*.[vV][sS][dD]" ;
+visio_stencil visio compressed_file : !-printable & -name "*.[vV][sS][sS]" ;
+oracle_message_file oracle source compressed_file : !-printable &
+	(-name "*.msb" | -name "*.MSB") ;
+oracle_form_design oracle source compressed_file : !-printable &
+	(-name "*.fmb" | -name "*.FMB") ;
+oracle_form_runtime oracle source compressed_file : !-printable &
+	(-name "*.fmx" | -name "*.FMX") ;
+oracle_menu_design oracle source compressed_file : !-printable &
+	(-name "*.mmb" | -name "*.MMB") ;
+oracle_menu_runtime oracle source compressed_file : !-printable &
+	(-name "*.mmx" | -name "*.MMX") ;
+oracle_plsql_design oracle source compressed_file : !-printable &
+	(-name "*.pll" | -name "*.PLL") ;
+oracle_plsql_runtime oracle source compressed_file : !-printable &
+	(-name "*.plx" | -name "*.PLX") ;
+oracle_object_library_design oracle source compressed_file : !-printable &
+	(-name "*.olb" | -name "*.OLB") ;
+oracle_report_definition oracle source compressed_file : !-printable &
+	(-name "*.rdf" | -name "*.RDF") ;
+oracle_graphics_builder oracle source compressed_file : !-printable &
+	(-name "*.ogd" | -name "*.OGD") ;
+global_server_file web_file source compressed_file : !-printable & -name "*.[aA][sS][aA]" ;
+
+# Match non-printable files by name and magic number
+ms_help compressed_file : !-printable & -name "*.[hH][lL][pP]" &
+		(-magic 0, l_long, 0x00035f3f);
+unicode ms_word ms_office compressed_file : -magic 0, l_short, 0xFEFF | -magic 0, l_short, 0xFFFE;
+# (0x4b50 = Office 2007) (53200 = 0xCFD0 = word 97/2007) (0xA5DB = word 2) (0xA59B = word 1) 
+ms_word ms_office compressed_file : !-printable & -name "*.[dD][oO][cC]" &
+	( -magic 0, l_short, 53200 | -magic 0, l_short, 0xA5DB | -magic 0, l_short, 0xA59B );
+ms_word ms_office compressed_file : -name "*.[dD][oO][cC]" & -magic 0, "{\\rtf";
+ms_word ms_office compressed_file : !-printable & -name "*.[dD][oO][cC][xX]" &
+	( -magic 0, l_short, 0x4b50);
+ms_word_template ms_office compressed_file : !-printable & -name "*.[dD][oO][tT]" &
+		(-magic 0, l_short, 53200);
+ms_word_wizard ms_office compressed_file : !-printable & -name "*.[wW][iI][zZ]" &
+		(-magic 0, l_short, 53200);
+ms_excel ms_office compressed_file : !-printable & -name "*.[xX][lL][sS]" &
+		(-magic 0, l_short, 53200);
+ms_excel_template ms_office compressed_file : !-printable & -name "*.[xX][lL][tT]" &
+		(-magic 0, l_short, 53200);
+ms_excel_addin ms_office compressed_file : !-printable & 
+		(-name "*.[xX][lL][aA]") &
+		(-magic 0, l_short, 53200);
+ms_powerpoint ms_office compressed_file : !-printable & -name "*.[pP][pP][tT]" &
+		(-magic 0, l_short, 53200);
+ms_powerpoint_show ms_office compressed_file : !-printable & -name "*.[pP][pP][sS]" &
+		(-magic 0, l_short, 53200);
+ms_powerpoint_addin ms_office compressed_file : !-printable & -name "*.[pP][pP][aA]" &
+		(-magic 0, l_short, 53200);
+ms_powerpoint_wizard ms_office compressed_file : !-printable & -name "*.[pP][wW][zZ]" &
+		(-magic 0, l_short, 53200);
+ms_powerpoint_template ms_office compressed_file : !-printable & -name "*.[pP][oO][tT]" &
+		(-magic 0, l_short, 53200);
+ms_binder ms_office compressed_file : !-printable & -name "*.[oO][bB][dD]" &
+		(-magic 0, l_short, 53200);
+ms_binder_template ms_office compressed_file : !-printable & -name "*.[oO][bB][tT]" &
+		(-magic 0, l_short, 53200);
+ms_outlook_template ms_office compressed_file : !-printable & -name "*.[oO][fF][tT]" &
+		(-magic 0, l_short, 53200);
+message ms_office compressed_file : !-printable & -name "*.[mM][sS][gG]" &
+		(-magic 0, l_short, 53200);
+ms_access_template ms_office compressed_file : !-printable & -name "*.[mM][dD][zZ]" &
+		(-magic 0, l_short, 53200);
+ms_access_addin ms_office compressed_file : !-printable & -name "*.[mM][dD][aA]" ;
+# magic is 0xCAFEBABE
+java_bytecode compressed_file : -name "*.[cC][lL][aA][sS][sS]" &
+		(-magic 0, l_short, 65226) &
+		(-magic 2, l_short, 48826) ;
+write compressed_file : !-printable & -name "*.[wW][rR][iI]" &
+		(-magic 0, l_short, 0xBE31);
+
+# Check file contents
+csh_script script text_file : -printable & -magic 0, "#!" & -token "csh" ;
+ksh_script script text_file : -printable & -magic 0, "#!" & -token "ksh" ;
+sh_script script text_file : -printable & -magic 0, "#!" & -token "sh" ;
+sh_script script text_file : -printable & -magic 0, "#" &
+			    ( -token "if [" | -token "esac" );
+rtf document compressed_file : -magic 0, "{\\rtf" ;
+
+# Defaults when file exists and is readable
+text_file : -printable ;
+compressed_file : !-printable ;
+
+# Check by name only (when file does not exist)
+# assumed to be text
+c_source source text_file : -name "*.c" ;
+c_include include source text_file : -name "*.h" ;
+cplusplus_source source text_file : (-name "*.cxx" | -name "*.c++" |
+				     -name "*.C" | -name "*.cc" | -name "*.[cC][pP][pP]");
+cplusplus_include include source text_file : (-name "*.[hH][xX][xX]" | -name "*.h++" |
+					     -name "*.H" | -name "*.hh" | -name "*.hpp");
+uil_source source text_file : -name "*.uil" ;
+csh_script script text_file :  (-name ".cshrc" | -name ".login" | -name "*.csh");
+sh_script script text_file : (-name ".profile" | -name "*.sh");
+ksh_script script text_file :  (-name ".profile" | -name ".login" | -name "*.ksh");
+tcl_source source text_file : -name "*.tcl" ;
+makefile text_file :  (-name "Imakefile" | -name "Makefile" | 
+			-name "makefile" | -name "*.[mM][aA][kK]" | -name "*.[mM][kK]") ;
+java_source source text_file : -name "*.[jJ][aA][vV][aA]" ;
+devstudio_project ds_project source text_file : -name "*.[dD][sS][pP]" ; 
+devstudio_workspace ds_project source text_file : -name "*.[dD][sS][wW]" ;
+devstudio_solution_file ds_project source text_file : -name "*.[sS][lL][nN]" ;
+vid_project ds_project source text_file : -name "*.[vV][iI][pP]" ;
+v_analyzer_project ds_project source text_file : -name "*.[vV][aA][pP]" ;
+visual_basic_project ds_project source text_file : -name "*.[vV][bB][pP]" ;
+visual_basic_workspace ds_project source text_file : -name "*.[vV][bB][wW]" ;
+resource_file vc_source source text_file : (-name "*.[rR][cC]" | -name "*.[rR][cC]2") ;
+com_odl_file vc_source source text_file : -name "*.[oO][dD][lL]" ;
+com_idl_file vc_source source text_file : -name "*.[iI][dD][lL]" ;
+devstudio_macro vc_source source text_file : -name "*.[dD][sS][mM]" ;
+registrar_script vc_source source text_file : -name "*.[rR][gG][sS]" ;
+registry_entries script text_file : -name "*.[rR][eE][gG]" ;
+module_definition vc_source source text_file : -name "*.[dD][eE][fF]" ;
+active_server_page web_file source text_file : -name "*.[aA][sS][pP]" |  -name "*.[aA][sS][pP][xX]" ;
+url web_file source text_file : -name "*.[uU][rR][lL]" ;
+vbscript web_file script text_file : -name "*.[vV][bB][sS]" ;
+javascript web_file script text_file : -name "*.[jJ][sS]" ;
+info script text_file : -name "*.[iI][nN][fF]" ;
+cascading_style_sheet web_file source text_file : -name "*.[cC][sS][sS]" ;
+sql_query source text_file : -name "*.[sS][qQ][lL]" ;
+basic_module vb_source source text_file : -name "*.[bB][aA][sS]" | -name "*.[vV][bB]" ;
+vb_form_source vb_source source text_file : -name "*.[fF][rR][mM]" ;
+vb_class vb_source source text_file : -name "*.[cC][lL][sS]" ;
+ctl source text_file : -name "*.[cC][tT][lL]" ;
+property_page vb_source source text_file : -name "*.[pP][aA][gG]" ;
+user_document vb_source source text_file : -name "*.[dD][oO][bB]" ;
+active_designer vb_source source text_file : -name "*.[dD][sS][rR]" ;
+msdos_batch script text_file : -name "*.[bB][aA][tT]" ;
+xml binary_delta_file : -name "*.[vV][cC][pP][rR][oO][jJ]" ;
+xml binary_delta_file : -name "*.[eE][tT][pP]" ;
+xml binary_delta_file : -name "*.[dD][iI][sS][cC][oO]" | -name "*.[vV][sS][dD][iI][sS][cC][oO]" ;
+xml binary_delta_file : -name "*.[rR][eE][sS][xX]" ;
+source text_file : -name "*.[cC][sS]" ;
+source text_file : -name "*.asax" | -name "*.asmx" ;
+xml binary_delta_file : -name "*.[cC][sS][pP][rR][oO][jJ]" ;
+source text_file : -name "*.[vV][bB][pP][rR][oO][jJ]" | -name "*.[uU][sS][eE][rR]" | -name "*.[vV][dD][pP][rR][oO][jJ]" ;
+xde                   : -name "*.[aA][cC][xX]" | -name "*.[aA][gG][xX]" |
+                        -name "*.[aA][rR][tT]" | -name "*.[cC][bB][xX]" |
+                        -name "*.[cC][iI][xX]" | -name "*.[cC][lL][xX]" |
+                        -name "*.[cC][mM][xX]" | -name "*.[cC][nN][xX]" |
+                        -name "*.[dD][gG][xX]" | -name "*.[eE][nN][xX]" |
+                        -name "*.[iI][fF][xX]" | -name "*.[iI][iI][xX]" |
+                        -name "*.[iI][nN][xX]" | -name "*.[mM][dD][xX]" |
+                        -name "*.[nN][dD][xX]" | -name "*.[nN][iI][xX]" |
+                        -name "*.[oO][bB][xX]" | -name "*.[pP][kK][xX]" |
+                        -name "*.[sS][gG][xX]" | -name "*.[sS][mM][xX]" |
+                        -name "*.[sS][sS][xX]" | -name "*.[uU][cC][xX]" |
+                        -name "*.[wW][dD][xX]" ;
+xtools2 --mkeltype.xtools2.binary_delta_file._xtools2 : -name "*.[eE][mM][xX]" |
+                                                        -name "*.[eE][pP][xX]" |
+                                                        -name "*.[tT][pP][xX]";
+xtools --mkeltype.xtools.binary_delta_file._xtools : -name "*.[dD][nN][xX]";
+rose_model rose rose_unit rational source text_file : -name "*.mdl" ;
+petal rose rose_unit rational source text_file : -name "*.ptl" ;
+rose_package rose rose_unit rational source text_file : -name "*.cat" ;
+rose_component_diagram_package rose rose_unit rational source text_file : -name "*.sub" ; 
+rose_properties rose rose_unit rational source text_file : -name "*.pty" ;
+rose_prp_properties rose rose_unit rational source text_file : -name "*.prp" ; 
+rose_processor_diagram rose rose_unit rational source text_file : -name "*.prc" ;
+rosert binary_delta_file : -name "*.rtmdl"       | -name "*.rtptl"      |
+                      -name "*.rtlogpkg"    | -name "*.rtclass"    |
+                      -name "*.rtcollab"    | -name "*.rtclassdgm" |
+                      -name "*.rtcmppkg"    | -name "*.rtcmp"      |
+                      -name "*.rtcmpdgm"    | -name "*.rtdeploy"   |
+                      -name "*.rtdeploydgm" | -name "*.rtdev"      |
+                      -name "*.rtprcsr"     | -name "*.rtintractn" ;
+perl script text_file : (-name "*.pl" | -name "*.prl" | -name "*.perl" | -name "*.ph");
+log_file document text_file : -name "*.[lL][oO][gG]" ;
+txt document text_file : -name "*.[tT][xX][tT]" ;
+initialization_entries ini text_file : -name "*.[iI][nN][iI]" ;
+perl_library script text_file : -name "*.pm" ;
+powerbuilder_source source text_file : (-name "*.sr[duajmpfsqw]" | -name "*.SR[DUAJMPFSQW]") ;
+oracle_form_text oracle source text_file : (-name "*.fmt" | -name "*.FMT") ;
+oracle_menu_text oracle source text_file : (-name "*.mmt" | -name "*.MMT") ;
+oracle_plsql_text oracle source text_file : (-name "*.pld" | -name "*.PLD") ;
+oracle_object_library_text oracle source text_file : (-name "*.olt" | -name "*.OLT") ;
+lex source text_file : -name "*.l" ;
+yacc source text_file : -name "*.y" ;
+help_project source text_file : -name "*.[hH][pP][jJ]" ;
+help_contents source text_file : -name "*.[cC][nN][tT]" ;
+assembler source text_file : -name "*.[aA][sS][mM]" ;
+cobol source text_file : -name "*.[cC][bB][lL]" ;
+fortran source text_file : (-name "*.[fF]" | -name "*.[fF]90" | -name "*.[fF][oO][rR]") ;
+pascal source text_file : -name "*.[pP][aA][sS]" ;
+
+# place other extensions for text_file for "check by name only" here
+
+# assumed to be binary
+object_module compressed_file : -name "*.o" ;
+uid_object object_module file : -name "*.uid" ;
+archive library compressed_file : -name "*.a" ;
+shlib library compressed_file : (-name "lib*_s" | -name "lib*.so.*" | -name "lib*.so");
+vjava_project ds_project compressed_file : -name "*.[vV][jJ][pP]" ;
+workspace_options ds_project compressed_file : -name "*.[oO][pP][tT]" ;
+compiled_resource vs_derived compressed_file : -name "*.[rR][eE][sS]" ;
+type_library vs_derived compressed_file : -name "*.[tT][lL][bB]" ;
+win_library vc_derived library compressed_file : -name "*.[lL][iI][bB]" ;
+cursor vs_source resource compressed_file : -name "*.[cC][uU][rR]" ;
+icon vs_source resource compressed_file : -name "*.[iI][cC][oO]" ;
+resource_template vc_source resource compressed_file : -name "*.[rR][cC][tT]" ;
+activex_control vs_derived library compressed_file : -name "*.[oO][cC][xX]" ;
+cabinet archive file : -name "*.[cC][aA][bB]" ;
+vb_form_compiled vb_derived compressed_file : -name "*.[fF][rR][xX]" ;
+vb_user_control_compiled vb_derived compressed_file : -name "*.[cC][tT][xX]" ;
+user_document_compiled vb_derived compressed_file : -name "*.[dD][oO][xX]" ;
+active_designer_compiled vb_derived compressed_file : -name "*.[dD][sS][xX]" ;
+property_page_compiled vb_derived compressed_file : -name "*.[pP][gG][xX]" ;
+site_diagram web_file compressed_file : -name "*.[wW][dD][mM]" ;
+ms_access_db database compressed_file : -name "*.[mM][dD][bB]" ;
+management_saved_console mmc compressed_file : -name "*.[mM][sS][cC]" ;
+shortcut compressed_file : -name "*.[lL][nN][kK]" ;
+visio_template visio compressed_file : -name "*.[vV][sS][tT]" ;
+visio_workspace visio compressed_file : -name "*.[vV][sS][wW]" ;
+visio_drawing visio compressed_file : -name "*.[vV][sS][dD]" ;
+visio_stencil visio compressed_file : -name "*.[vV][sS][sS]" ;
+oracle_message_file oracle source compressed_file : (-name "*.msb" | -name "*.MSB") ;
+oracle_form_design oracle source compressed_file : (-name "*.fmb" | -name "*.FMB") ;
+oracle_form_runtime oracle source compressed_file : (-name "*.fmx" | -name "*.FMX") ;
+oracle_menu_design oracle source compressed_file : (-name "*.mmb" | -name "*.MMB") ;
+oracle_menu_runtime oracle source compressed_file : (-name "*.mmx" | -name "*.MMX") ;
+oracle_plsql_design oracle source compressed_file : (-name "*.pll" | -name "*.PLL") ;
+oracle_plsql_runtime oracle source compressed_file : (-name "*.plx" | -name "*.PLX") ;
+oracle_object_library_design oracle source compressed_file : (-name "*.olb" | -name "*.OLB") ;
+oracle_report_definition oracle source compressed_file : (-name "*.rdf" | -name "*.RDF") ;
+oracle_graphics_builder oracle source compressed_file : (-name "*.ogd" | -name "*.OGD") ;
+global_server_file web_file source compressed_file : -name "*.[aA][sS][aA]" ;
+
+# place other extensions for binary for "check by name only" here
+bitmap image compressed_file : -name "*.[bB][mM][pP]" | -name "*.[Dd][Ii][Bb]" | -name "*.[mM][sS][kK]";
+ms_help compressed_file : -name "*.[hH][lL][pP]" ;
+# if the file doesn't exist, and the extension is .doc. There are multiple
+# applications that create .doc files, so type it simply "doc_file", not
+# ms_word, or frame, or ...
+doc_file compressed_file : -name "*.[dD][oO][cC]" ;
+ms_word ms_office compressed_file : -name "*.[dD][oO][cC][xX]" ;
+ms_word_template ms_office compressed_file : -name "*.[dD][oO][tT]" ;
+ms_word_wizard ms_office compressed_file : -name "*.[wW][iI][zZ]" ;
+ms_excel ms_office compressed_file : -name "*.[xX][lL][sS]" ;
+ms_excel_template ms_office compressed_file : -name "*.[xX][lL][tT]" ;
+ms_excel_addin ms_office compressed_file : -name "*.[xX][lL][aA]" ;
+ms_powerpoint ms_office compressed_file : -name "*.[pP][pP][tT]" ;
+ms_powerpoint_show ms_office compressed_file : -name "*.[pP][pP][sS]" ;
+ms_powerpoint_addin ms_office compressed_file : -name "*.[pP][pP][aA]" ;
+ms_powerpoint_wizard ms_office compressed_file : -name "*.[pP][wW][zZ]" ;
+ms_powerpoint_template ms_office compressed_file : -name "*.[pP][oO][tT]" ;
+ms_binder ms_office compressed_file : -name "*.[oO][bB][dD]" ;
+ms_binder_template ms_office compressed_file : -name "*.[oO][bB][tT]" ;
+ms_outlook_template ms_office compressed_file : -name "*.[oO][fF][tT]" ;
+message ms_office compressed_file : -name "*.[mM][sS][gG]" ;
+ms_access_template ms_office compressed_file : -name "*.[mM][dD][zZ]" ;
+ms_access_addin ms_office compressed_file : -name "*.[mM][dD][aA]" ;
+# magic is 0xCAFEBABE
+java_bytecode compressed_file : -name "*.[cC][lL][aA][sS][sS]" ;
+write compressed_file : -name "*.[wW][rR][iI]" ;
+rtf document compressed_file : -name "*.[rR][tT][fF]" ;
+dat compressed_file : -name "*.dat" | -name "*.DAT" ;
+ncb_idb_pdb_bsc vc_derived compressed_file : -name "*.ncb" | -name "*.idb" | -name "*.pdb" | -name "*.bsc" |
+			-name "*.NCB" | -name "*.IDB" | -name "*.PDB" | -name "*.BSC";
+
+# catch-all, if nothing else matches
+compressed_file : -name "*" ;

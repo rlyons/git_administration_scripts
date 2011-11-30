@@ -1,0 +1,27 @@
+<config>
+	<!-- The values for these properties can be defined using environment variables 
+	or locally defined variables in this file -->
+	
+	<!-- This is the directory where the log files are written --> 
+	<property name="basedir" value="/cme/gfix/gitimports/git2cc/projects" />
+	
+	<!-- This is the directory where the repo is created  --> 
+	<property name="repodir" value="${basedir}/gitrepos" />
+	
+	<!-- for view creation  --> 
+	<property name="view_host" value="ccview1" />
+	<property name="view_stgloc" value="/net/ccview1/viewstg1" />
+	<property name="view_prefix" value="cmgit2cc" />
+	
+	<!-- Max. number of threads to run during the import process  --> 
+	<property name="max_processes" value="4" />
+
+	<!-- PVOB context for components and streams -->
+	<pvob name="/cc/ETPA_CCM_PROJECT">
+		<!-- GIT REPO and the associated component -->
+		<gitrepo url="ssh://git@cmegit/etpa_template_management.git" name="etpa_template_management" component="template_management" >
+			<branch name="release" stream="ETPA_Template_Management_integration" activity="CQPRD00989317" />
+		</gitrepo>
+		<!-- GIT REPO and the associated component -->
+	</pvob>
+</config>

@@ -1,0 +1,27 @@
+<config>
+	<!-- The values for these properties can be defined using environment variables 
+	or locally defined variables in this file -->
+	
+	<!-- This is the directory where the log files are written --> 
+	<property name="basedir" value="/home/_svcmaven-dev/gitimports/git2cc/projects/gitrepos" />
+	
+	<!-- This is the directory where the repo is created  --> 
+	<property name="repodir" value="${basedir}/repos" />
+	
+	<!-- for view creation  --> 
+	<property name="view_host" value="apstrd04801q" />
+	<property name="view_stgloc" value="/cme/vws" />
+	<property name="view_prefix" value="cmgit2cc" />
+	
+	<!-- Max. number of threads to run during the import process  --> 
+	<property name="max_processes" value="4" />
+
+	<!-- PVOB context for components and streams -->
+	<pvob name="/PVOB_CME_TEST">
+		<!-- GIT REPO and the associated component -->
+		<gitrepo name="/PVOB_CME_TEST" url="ssh://git@cmegit/me/ets_falcon" component="GITIMPORT">
+			<!-- <branch name="5.8.0_rel" stream="GITIMPORT1.0_Integration" activity="git2cc_import_bvmf_test"/> -->
+			<branch name="5.8.0_rel" stream="GITIMPORT1.0_Integration" />
+		</gitrepo>
+	</pvob>
+</config>

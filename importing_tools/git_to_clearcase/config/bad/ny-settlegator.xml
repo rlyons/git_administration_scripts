@@ -1,0 +1,23 @@
+<config>
+	<!-- These values can be defined using environment variables or locally 
+		defined variables in this file -->
+	<property name="basedir" value="/home/ccase/e13139/GIT/projects" />
+	<property name="repodir" value="${basedir}" />
+	<property name="view_host" value="ccview1" />
+	<property name="view_stgloc" value="/net/ccview1/viewstg1" />
+	<property name="view_prefix" value="cmgitgv" />
+	<property name="max_processes" value="4" />
+
+	<vob name="/cc/EMA">
+		<gitrepo name="ny_settlegator">
+			<!-- directories to import --> 
+			<include name="/cc/EMA/Settlegator" />
+			<!-- branches to import -->
+			<branch name="main" start_from="">
+				<!-- label patterns to import -->
+				<labelpattern name="SETTLEGATOR_" />
+			</branch>
+		</gitrepo>
+	</vob>
+
+</config>

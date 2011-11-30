@@ -1,0 +1,30 @@
+<config>
+	<!-- These values can be defined using environment variables or locally defined variables in this file -->
+	<property name="basedir" value="/var/tmp/spalli/repos" />
+	<property name="repodir" value="${basedir}" />
+	<property name="view_host" value="ccview1" />
+	<property name="view_stgloc" value="/net/ccview1/viewstg1" />
+	<property name="view_prefix" value="cmgit" />
+	<property name="max_processes" value="4" />
+
+	<pvob name="/cc/CME_CM_TEST">
+		<stream name="TEST_PROJ_GV_integration" git_branch="integration" />
+		<stream name="bl1_TEST_PROJ_GV" git_branch="bl1" />
+		<stream name="build_TEST_PROJ_GV" git_branch="build" />
+		<stream name="CCRC_TEST_PROJ_GV" git_branch="CCRC" />
+		<stream name="cm_TEST_PROJ_GV" git_branch="cm" />
+		<stream name="e13139_TEST_PROJ_GV" git_branch="e13139" />
+		<stream name="gvelayud_TEST_PROJ_GV" git_branch="gvelayud" />
+		<stream name="maint_TEST_PROJ_GV" git_branch="maint" />
+		<stream name="gvelayud_maint_TEST_PROJ_GV" git_branch="gvelayud_maint" />
+		<stream name="gvel_maint_TEST_PROJ_GV" git_branch="gvel_maint" />
+		<stream name="mnagaraj_TEST_PROJ_GV" git_branch="mnagaraj" />
+		<stream name="rambarte_TEST_PROJ_GV" git_branch="rambarte" />
+		<stream name="rlyons_TEST_PROJ_GV" git_branch="rlyons" />
+		<stream name="test1_TEST_PROJ_GV" git_branch="" />
+		<stream name="test2_TEST_PROJ_GV" git_branch="" />
+		<stream name="wc1_TEST_PROJ_GV" />
+		<stream name="wc2_TEST_PROJ_GV" />
+		<stream name="wc_TEST_PROJ_GV" />
+	</pvob>
+</config>

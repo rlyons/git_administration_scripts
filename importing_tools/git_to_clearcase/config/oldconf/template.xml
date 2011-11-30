@@ -1,0 +1,30 @@
+<config>
+	<!-- The values for these properties can be defined using environment variables 
+	or locally defined variables in this file -->
+	
+	<!-- This is the directory where the log files are written --> 
+	<property name="basedir" value="/var/tmp/spalli/git2cc" />
+	
+	<!-- This is the directory where the repo is created  --> 
+	<property name="repodir" value="${basedir}/repos" />
+	
+	<!-- for view creation  --> 
+	<property name="view_host" value="ccvobtest1" />
+	<property name="view_stgloc" value="/net/uxhome/vol/ccvobs1_tgt/vobstg1/ccviewtest" />
+	<property name="view_prefix" value="cmgit2cc" />
+	
+	<!-- Max. number of threads to run during the import process  --> 
+	<property name="max_processes" value="4" />
+
+	<!-- PVOB context for components and streams -->
+	<pvob name="/cc/PS_TEST_PVOB">
+		<!-- GIT REPO and the associated component -->
+		<gitrepo name="etpa_skep" url="ssh://git@gitpoc/etpa_skep.git" component="ETPA_SKEP">
+			<branch name="release" stream="ETPA_SKEP3.0_integration" activity="git2cc_import_skep"/>
+		</gitrepo>
+
+		<gitrepo name="etpa_maja" url="ssh://git@gitpoc/etpa_maja.git" component="ETPA_MAJA">
+			<branch name="release" stream="ETPA_MAJA_2.0_integration" activity="git2cc_import_maja"/>
+		</gitrepo>
+	</pvob>
+</config>

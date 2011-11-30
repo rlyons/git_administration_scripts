@@ -1,0 +1,18 @@
+<config>
+	<!-- These values can be defined using environment variables or locally defined variables in this file -->
+	<property name="basedir" value="/cme/gfix/gitimports/git2cc/projects/gitrepos" />
+	<property name="repodir" value="${basedir}" />
+	<property name="view_host" value="ccview1" />
+	<property name="view_stgloc" value="/net/ccview1/viewstg1" />
+	<property name="view_prefix" value="cmgit2cc" />
+	<property name="max_processes" value="4" />
+
+	<!-- PVOB context for components and streams -->
+	<pvob name="/cc/ETPA_CCM_PROJECT">
+		<!-- Generic Mapping for branches. Can be overridden at the next lower level -->
+		<branch name="release" stream="ETPA_BLOCKS_integration" activity="CQPRD00772348" />
+
+		<!-- GIT REPO and the associated component -->
+		<gitrepo name="etpa_blocks"  url="ssh://git@cmegit/etpa_blocks.git" component="ETPA_BLOCKS_SOURCE" />
+	</pvob>
+</config>
